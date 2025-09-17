@@ -10,6 +10,14 @@
 - Confirm sandbox, approval, and network policies at session start; factor them into the plan so work stays unblocked.
 - Capture relevant environment details (language versions, frameworks, package managers) before editing code.
 
+## Repository quick reference
+- Start the full stack with `docker compose watch`; tail service logs with `docker compose logs <service>` when debugging.
+- Run backend tests with `bash backend/scripts/test.sh` (or inside Docker via `docker compose exec backend bash scripts/tests-start.sh`).
+- Execute frontend end-to-end checks with `npx playwright test` after `docker compose up -d --wait backend`.
+- Install backend deps using `uv sync` and launch the dev server with `cd backend && fastapi dev app/main.py` when iterating locally.
+- Install frontend deps via `cd frontend && npm install`, then start the live reload server with `npm run dev`.
+- Keep formatting consistent by running `uv run pre-commit run --all-files` before large handoffs.
+
 ## Plan with intention
 - Decide if the planning tool is warranted; for multi-step or ambiguous work, produce a 3+ step plan and keep it updated.
 - Front-load risk: identify unknowns, edge cases, and potential blockers while planning; schedule validation steps early.
@@ -29,6 +37,12 @@
 - Always run the most targeted automated checks available; note skipped tests or missing coverage in the final report.
 - If tests are slow or flaky, document the risk and suggest follow-up rather than silently skipping verification.
 - Capture command outputs locally; summarize key evidence in the final response instead of dumping raw logs.
+
+## Feature quality gates
+- Define explicit acceptance gates before coding: list the automated suites (e.g., backend Pytest, Playwright) and non-test criteria (docs, migrations) the feature must satisfy.
+- Encode gates as repeatable commands or checklists; prefer running them locally before relying on CI.
+- Treat any gate failure as a stop signal—fix the issue, rerun the relevant suite, and repeat until every gate is green.
+- Record the final gate results in the handoff summary so reviewers know what evidence you gathered.
 
 ## Communication style
 - Default to concise, friendly, fact-driven language; mirror the user's tone while maintaining professionalism.
