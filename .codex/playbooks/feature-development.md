@@ -3,6 +3,7 @@
 1. Clarify scope
    - Restate the feature goal and success criteria in your own words; confirm acceptance with the user if gaps appear.
    - Map the impacted domains (frontend, backend, infra) and locate relevant modules with `rg`/`fd`.
+   - Capture the feature's logic gates early by drafting the checklist of automated suites and manual reviews you must pass.
 2. Baseline current behavior
    - Identify existing entry points, APIs, or components to extend; read tests and docs to understand expectations.
    - Capture screenshots, logs, or sample payloads when behavior comparisons will help validate changes.
